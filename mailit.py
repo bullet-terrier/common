@@ -11,7 +11,7 @@ from email.mime.text import MIMEText
 from email.utils import COMMASPACE, formatdate
 
 # populate some defaults for a mail handler.
-def send_mail(send_from, send_to, subject, text, files = None, server = "STINS-EXCH07"):
+def send_mail(send_from, send_to, subject, text, files = None, server = ""):
     assert isinstance(send_to, list) # force the send_to object to be a list.	
     # looks like applying each of these as attributes to the msg instance of MIMEMultipart()
     # it probably is possible to initialize those in the class constructor, but I don't know for sure, may test it at a later date.
