@@ -1,6 +1,9 @@
+#
 """
 Time to build a better log module...
+editing this to work with python 2.7
 
+removing all decroators from the variable declarations.
 """
 import datetime;
 import os;
@@ -47,7 +50,7 @@ class lumberjack:
         'archive_count',
         'extension'
     ]
-    def __init__(self:"instance_name",log_path:"string" = None, error_path:"string" = None, archive_path:"string" = None, line_ending:"string" = None, date_format:"string" = None, name_format:"string" = None, archive_at_size:"numeric" = None, archive_count:"numeric" = None):
+    def __init__(self,log_path = None, error_path = None, archive_path = None, line_ending = None, date_format = None, name_format = None, archive_at_size = None, archive_count = None):
         """
         initialize instance.
         """
@@ -61,7 +64,7 @@ class lumberjack:
         self.archive_at_size = archive_at_size or 10000; # 10000 bytes will probably be an adequate size, can be adjusted easily enough, no?
         self.archive_count = archive_count or 100; # use this to truncate the oldest files (might need to add an integration point to my analytic tools.)
     
-    def write_(self,contents:"input string"=None,log_path:"overload string"=None, is_error:"bool"=None):
+    def write_(self,contents =None,log_path=None, is_error=None):
         """
         write data into the designated log.
         """
