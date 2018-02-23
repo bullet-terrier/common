@@ -67,11 +67,11 @@ def find_least_recent_file(search_path,pattern = None):
     for a in os.listdir(search_path):
         if os.path.isabs(search_path):
             a = search_path+os.sep+a;
-       local_item = []
-       print(a);
-       if pattern not in a: continue;
-       local_item.append(a); local_item.append(os.path.getmtime(a));
-       log("Adding items to consider: %s"%(str(local_item)));
-       path_items.append(tuple(local_item))
+        local_item = []
+        print(a);
+        if pattern not in a: continue;
+        local_item.append(a); local_item.append(os.path.getmtime(a));
+        log("Adding items to consider: %s"%(str(local_item)));
+        path_items.append(tuple(local_item))
     least_recent = min_tup(path_items,1);
     return least_recent;
