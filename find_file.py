@@ -10,6 +10,7 @@ is inaccurate...
 """
 
 import os;
+import splash; # this isn't necessary, just fun.
 from log_function import log_output as log
 from tuple_comparisons import *;
 
@@ -75,3 +76,5 @@ def find_least_recent_file(search_path,pattern = None):
         path_items.append(tuple(local_item))
     least_recent = min_tup(path_items,1);
     return least_recent;
+
+
