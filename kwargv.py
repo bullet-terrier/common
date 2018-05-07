@@ -60,6 +60,7 @@ def args2kwargs_avoid_quotes(lst):
     """
     pass;
     # 
+    raise Exception("Not Implemented");
 
 def args2kwargs(lst,*args,**kwargs):
     """
@@ -71,6 +72,9 @@ def args2kwargs(lst,*args,**kwargs):
     main premise is to allow sequential/flag type arguments as 
     well as keyword based arguments, which will allow for better
     processing of irregular human input. (need to look at global impact)
+
+    args2kwargs()[0] = positional (listed) arguments
+    args2kwargs()[1] = keyword based arguments.
 
     """
     #    main keyword argument is the 'separator' which can have its behavior
