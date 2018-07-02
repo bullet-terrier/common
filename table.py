@@ -48,10 +48,10 @@ class table:
         pass
         if len(self.fields) == 0:
             self.fields = self.get_fields()
-        self.insert_statement = "INSERT INTO %s"%(self.keys['name'])
+        self.insert_statement = "INSERT INTO %s ("%(self.keys['name'])
         for a in self.fields:
             self.insert_statement +="\n%s"%(a[0]); # pull the field name.
-            if len(self.fields)-1 != fields.index(a): self.insert_statement+=',';
+            if len(self.fields)-1 != self.fields.index(a): self.insert_statement+=',';
         self.insert_statement += ") VALUES ("
         for a in range(0,len(self.fields)):
             if 'char' in self.fields[a][1].lower(): self.insert_statement+="'%s'"
@@ -65,12 +65,12 @@ class table:
         """
         """
         pass
-        self.create_statement = "CREATE TABLE %s"%(self.keys['name'])
+        self.create_statement = "CREATE TABLE %s ("%(self.keys['name'])
         if len(self.fields) == 0:
             self.fields = self.get_fields();
         for a in self.fields:
-            self.create_statement+="\n%s %s"(a[0],a[1]);
-            if len(self.fields) > self.fields.index(a): self.create_statement+=",";
+            self.create_statement+="\n%s %s"%(a[0],a[1]);
+            if len(self.fields)-1 > self.fields.index(a): self.create_statement+=",";
         self.create_statement+=")";
         return self.create_statement;
         
@@ -108,5 +108,5 @@ class table:
         # use the keywords to instantiate the object.
         self.keys = kwargv.reconcile(table.keys,kwargs);
         self.fields = self.get_fields();
-        self.name = keys['name']
+        self.name = self.keys['name']
         # note: self.keys will override the base class (not sure why)
