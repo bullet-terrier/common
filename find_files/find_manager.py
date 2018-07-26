@@ -3,7 +3,7 @@
 finder.py: combine what we learned from find files and import manager.
 Might set up a debug variant of these modules.
 """
- 
+import pdb;
 import sqlite3;
 import os;
 import sys; 
@@ -30,6 +30,7 @@ class find_manager: #(import_manager.safe_management):
         #self.db_filename = import_manager.import_management.db_filename;
         # I need to make a thread safe clone of this module.
         self.selection_manager = safe_management();
+        '(Pdb)'
         pass;
     # lets
     
@@ -39,6 +40,7 @@ class find_manager: #(import_manager.safe_management):
         anyway I'll supply some syntactic sugar to make it easier to use.
         :::"""
         pass
+        '(Pdb)'
         # minimalist approach. if they pass the wrong stuff, let it ride.
         path_items = []
         for a in os.listdir(path):
@@ -61,3 +63,4 @@ class find_manager: #(import_manager.safe_management):
         input();
         self.selection_manager.add_file(most_recent);
         return most_recent; # I'm going to change this up to keepgoing to the file date.
+        
