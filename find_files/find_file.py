@@ -12,8 +12,8 @@ looking to integrate import_manager.py into this file (or build a new file.);
 """
 
 import os;
-import splash; # this isn't necessary, just fun.
-from log_function import log_output as log
+#import splash; # this isn't necessary, just fun.
+#from log_function import log_output as log
 from tuple_comparisons import *;
 
 def find_most_recent_file(search_path,pattern = None):

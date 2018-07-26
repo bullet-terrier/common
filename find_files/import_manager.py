@@ -34,14 +34,14 @@ class safe_management:
     """
     default_filename = "imported_files.dbo"
     #default_tablename = "import_manager";
-    default_tabledef = "CRETE TABLE import_manager (id int not null primary key, filename text,import_date numeric ";#;import_date text)";
+    default_tabledef = "CREATE TABLE import_manager (id int not null primary key, filename text,import_date numeric)";#;import_date text)";
     # IF YOU CHANGE THE TABLEDEFINITION - YOU NEED TO UPDATE THE 'add_query' and 'check_query'
     def __init__(self, dbfile = None, tabledef = None):
         """
         """
         pass;
-        if dbfile is None: dbfile = default_filename;
-        if tabledef is None: tabledef = default_tabledef;
+        if dbfile is None: dbfile = safe_management.default_filename;
+        if tabledef is None: tabledef = safe_management.default_tabledef;
         self.db_filename = dbfile;
         if not os.path.isfile(self.db_filename):
             conn = sqlite3.connect(self.db_filename);
@@ -71,12 +71,21 @@ class safe_management:
         pass;
         try:
             conn = sqlite3.connect(self.db_filename);
-            cursor = connection.cursor()
+            cursor = conn.cursor()
+            cursor.execute("SELECT MAX(id) FROM import_manager");
+            m = cursor.fetchall()[0][0]; # should be the first item of the first row.
+            print(m); # let's see if we even get this far - or if the problem is in the definition for "import_manager";
+            if m is None: m = 0;
+            m+=1;
             # this will allow for the 'prune by age' method that I wanted to include a while back.
-            cursor.execute("INSERT INTO import_manager(id,filename,import_date) VALUES(%s,'%s','%s')"%(int(m),file_name,time.time()))#strftime("%Y-%m-%d")))
+            # 
+            # right-  I changed from a string type to a numeric type  for time.time() which means it doesn't need the '' wrappers.
+            # could it be that time.time() is causing the issue?
+            cursor.execute("INSERT INTO import_manager(id,filename,import_date) VALUES(%s,'%s',%s)"%(int(m),filename,time.time()))#strftime("%Y-%m-%d")))
             conn.commit();
         except Exception as E:
-            return E;
+            print(str(E)); # looks like I've got to figure out which value isn't getting passed correctly.
+            raise Exception(E);#return E;
         return 0;
         
     def check_file(self, filename):
@@ -88,11 +97,11 @@ class safe_management:
         try:
             pass;
             conn = sqlite3.connect(self.db_filename);
-            cursor = connection.cursor();
+            cursor = conn.cursor();
             cursor.execute("SELECT COUNT(id) FROM imoprt_manager WHERE filename LIKE '\%%s\%'"%(filename));
             count = cursor.fetchall()[0][0];# return the first column of the first row.
         except Exception as E:
-            count = E; # that'll throw someone for a loop lol.
+            print(str(E)); # that'll throw someone for a loop lol.
         return count;
         
     def compare_file(self, filename):
