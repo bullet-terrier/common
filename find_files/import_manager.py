@@ -98,7 +98,7 @@ class safe_management:
             pass;
             conn = sqlite3.connect(self.db_filename);
             cursor = conn.cursor();
-            cursor.execute("SELECT COUNT(id) FROM imoprt_manager WHERE filename LIKE '\%%s\%'"%(filename));
+            cursor.execute("SELECT COUNT(id) FROM imoprt_manager WHERE filename LIKE '%s'"%(filename));
             count = cursor.fetchall()[0][0];# return the first column of the first row.
         except Exception as E:
             print(str(E)); # that'll throw someone for a loop lol.
