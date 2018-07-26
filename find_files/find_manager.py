@@ -42,17 +42,22 @@ class find_manager: #(import_manager.safe_management):
         # minimalist approach. if they pass the wrong stuff, let it ride.
         path_items = []
         for a in os.listdir(path):
-            if os.path.isabs(path):
-                a = search_path+os.sep+a;
-            local_item = [];
-            if pattern not in a: continue;
-            local_item.append(a); local_item.append(os.path.getmtime(a));
-            path_items.append(tuple(local_item))
+            try:
+                if os.path.isabs(path):
+                    a = search_path+os.sep+a;
+                local_item = [];
+                if pattern not in a: continue;
+                local_item.append(a); local_item.append(os.path.getmtime(a));
+                path_items.append(tuple(local_item))
+            except Exception as E:
+                print(E);
         remove_paths = []
         for a in path_items:
-            if self.selection_manager.has_file(a)>0:
-                #print("This has been imported!");
-                remove_paths.append(a);
+            try:
+                if self.selection_manager.has_file(a)>0:
+                    #print("This has been imported!");
+                    remove_paths.append(a);
+            except Exception as EE: print(EE);
         for a in remove_paths:
             path_items.remove(a);
             #print("removed %s from search."%(a));
