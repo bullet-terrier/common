@@ -37,6 +37,8 @@ class find_manager: #(import_manager.safe_management):
         """:::
         what in the world is wrong with me for naming this thing - 
         anyway I'll supply some syntactic sugar to make it easier to use.
+        somehthing between the original and this version is causing the issue.
+        it's odd that ...
         :::"""
         pass
         # minimalist approach. if they pass the wrong stuff, let it ride.
